@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
-
 class App extends Component {
     state = {
         persons: [
@@ -20,6 +19,9 @@ class App extends Component {
             persons: [
                 {
                     name: name, age: 28
+                },
+                {
+                    name: 'Manu', age: 29
                 }
             ]
         });
@@ -39,6 +41,10 @@ class App extends Component {
     };
 
     render() {
+        const style = {
+            backgroundColor: 'red'
+        };
+
         return (
             <div className="App">
 
@@ -46,7 +52,9 @@ class App extends Component {
                     <button onClick={this.switchName.bind(this, 'ryan')}>Switch Name 1</button>
                 </div>
                 <div>
-                    <button onClick={() => this.switchName('ryan')}>Switch Name 2</button>
+                    <button
+                        style={style}
+                        onClick={() => this.switchName('ryan')}>Switch Name 2</button>
                 </div>
                 <div>
                     <Person
