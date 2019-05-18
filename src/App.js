@@ -77,6 +77,9 @@ class App extends Component {
                     {this.state.persons.map((person, index) => {
                         return (
                             <Person
+                                // by adding key index, help list to determine in DOM easily, whenever this part
+                                // is triggered
+                                key={index}
                                 click={this.deletePersonHandler.bind(this, index)}
                                 name={person.name}
                             >A</Person>
