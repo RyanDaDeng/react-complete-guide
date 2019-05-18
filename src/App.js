@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
+import Login from './Login/Login';
 
 class App extends Component {
     state = {
@@ -110,6 +111,7 @@ class App extends Component {
 
         return (
             <div className="App">
+                <Login></Login>
 
                 <h1>This is a good demo. </h1>
                 <p className={classes.join(' ')}>This is interesting.</p>
@@ -122,8 +124,13 @@ class App extends Component {
                         onClick={this.togglePersonHandler}>Toggle Persons
                     </button>
                 </div>
+                <div>
+                    REACT VERSION: { React.version}
+                </div>
 
                 {persons}
+
+
             </div>
         );
     }
