@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import styles from './App.css';
 import Person from './Person/Person';
 import Login from './Login/Login';
 
@@ -110,7 +110,7 @@ class App extends Component {
         }
 
         return (
-            <div className="App">
+            <div className={styles.App}>
                 <Login></Login>
 
                 <h1>This is a good demo. </h1>
