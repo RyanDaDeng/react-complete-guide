@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium from 'radium';
+import Radium, {StyleRoot} from 'radium';
 
 class App extends Component {
     state = {
@@ -76,15 +76,15 @@ class App extends Component {
         const style = {
             backgroundColor: 'red',
             ':hover': {
-                backgroundColor:'blue'
+                backgroundColor: 'blue'
             }
         };
 
         let persons = null;
         if (this.state.showPersons) {
             style.backgroundColor = 'green';
-            style[':hover'] ={
-                backgroundColor:'gray'
+            style[':hover'] = {
+                backgroundColor: 'gray'
             };
             persons = (
                 <div>
@@ -116,22 +116,24 @@ class App extends Component {
         }
 
         return (
-            <div className="App">
+            <StyleRoot>
+                <div className="App">
 
-                <h1>This is a good demo. </h1>
-                <p className={classes.join(' ')}>This is interesting.</p>
-                <div>
-                    <button onClick={this.switchName.bind(this, 'ryan')}>Switch Name 1</button>
-                </div>
-                <div>
-                    <button
-                        style={style}
-                        onClick={this.togglePersonHandler}>Toggle Persons
-                    </button>
-                </div>
+                    <h1>This is a good demo. </h1>
+                    <p className={classes.join(' ')}>This is interesting.</p>
+                    <div>
+                        <button onClick={this.switchName.bind(this, 'ryan')}>Switch Name 1</button>
+                    </div>
+                    <div>
+                        <button
+                            style={style}
+                            onClick={this.togglePersonHandler}>Toggle Persons
+                        </button>
+                    </div>
 
-                {persons}
-            </div>
+                    {persons}
+                </div>
+            </StyleRoot>
         );
     }
 }
