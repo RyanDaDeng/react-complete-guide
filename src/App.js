@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium, {StyleRoot} from 'radium';
 
 class App extends Component {
     state = {
@@ -74,18 +73,12 @@ class App extends Component {
 
     render() {
         const style = {
-            backgroundColor: 'red',
-            ':hover': {
-                backgroundColor: 'blue'
-            }
+            backgroundColor: 'red'
         };
 
         let persons = null;
         if (this.state.showPersons) {
             style.backgroundColor = 'green';
-            style[':hover'] = {
-                backgroundColor: 'gray'
-            };
             persons = (
                 <div>
                     {this.state.persons.map((person, index) => {
@@ -116,26 +109,24 @@ class App extends Component {
         }
 
         return (
-            <StyleRoot>
-                <div className="App">
+            <div className="App">
 
-                    <h1>This is a good demo. </h1>
-                    <p className={classes.join(' ')}>This is interesting.</p>
-                    <div>
-                        <button onClick={this.switchName.bind(this, 'ryan')}>Switch Name 1</button>
-                    </div>
-                    <div>
-                        <button
-                            style={style}
-                            onClick={this.togglePersonHandler}>Toggle Persons
-                        </button>
-                    </div>
-
-                    {persons}
+                <h1>This is a good demo. </h1>
+                <p className={classes.join(' ')}>This is interesting.</p>
+                <div>
+                    <button onClick={this.switchName.bind(this, 'ryan')}>Switch Name 1</button>
                 </div>
-            </StyleRoot>
+                <div>
+                    <button
+                        style={style}
+                        onClick={this.togglePersonHandler}>Toggle Persons
+                    </button>
+                </div>
+
+                {persons}
+            </div>
         );
     }
 }
 
-export default Radium(App); // wrapping again, decoration
+export default App;
