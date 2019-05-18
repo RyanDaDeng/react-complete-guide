@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styles from './App.css';
 import Person from './Person/Person';
 import Login from './Login/Login';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
     state = {
@@ -82,15 +83,16 @@ class App extends Component {
                 <div>
                     {this.state.persons.map((person, index) => {
                         return (
-                            <Person
-                                // by adding key index, help list to determine in DOM easily, whenever this part
-                                // is triggered
-                                // can also use list element id as well
-                                key={person.id}
-                                click={this.deletePersonHandler.bind(this, index)}
-                                name={person.name}
-                                changed={(event) => this.nameChangedHandler(event, person.id)}
-                            >A</Person>
+                            <ErrorBoundary key={person.id}>
+                                <Person
+                                    // by adding key index, help list to determine in DOM easily, whenever this part
+                                    // is triggered
+                                    // can also use list element id as well
+                                    click={this.deletePersonHandler.bind(this, index)}
+                                    name={person.name}
+                                    changed={(event) => this.nameChangedHandler(event, person.id)}
+                                >A</Person>
+                            </ErrorBoundary>
                         )
                     })}
                 </div>
@@ -124,7 +126,7 @@ class App extends Component {
                     </button>
                 </div>
                 <div>
-                    REACT VERSION: { React.version}
+                    REACT VERSION: {React.version}
                 </div>
 
                 {persons}
