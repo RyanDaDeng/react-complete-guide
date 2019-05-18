@@ -73,13 +73,11 @@ class App extends Component {
 
 
     render() {
-        const style = {
-            backgroundColor: 'red'
-        };
 
         let persons = null;
+        let btnClass = '';
+
         if (this.state.showPersons) {
-            style.backgroundColor = 'green';
             persons = (
                 <div>
                     {this.state.persons.map((person, index) => {
@@ -97,16 +95,17 @@ class App extends Component {
                     })}
                 </div>
             );
+            btnClass = styles.Red;
         }
 
         const classes = [];
 
         if (this.state.persons.length <= 2) {
-            classes.push('red'); // classes will be red
+            classes.push(styles.red); // classes will be red
         }
 
         if (this.state.persons.length <= 1) {
-            classes.push('bold');
+            classes.push(styles.bold);
         }
 
         return (
@@ -120,7 +119,7 @@ class App extends Component {
                 </div>
                 <div>
                     <button
-                        style={style}
+                        className={btnClass}
                         onClick={this.togglePersonHandler}>Toggle Persons
                     </button>
                 </div>
