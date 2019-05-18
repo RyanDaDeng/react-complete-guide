@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
+
 class App extends Component {
     state = {
         persons: [
@@ -11,7 +12,8 @@ class App extends Component {
                 name: 'Manu', age: 29
             }
         ],
-        otherState: ''
+        otherState: '',
+        showPersons: false
     };
 
     switchName = (name) => {
@@ -40,10 +42,36 @@ class App extends Component {
         })
     };
 
+    togglePersonHandler = () => {
+
+        this.setState({
+            showPersons: !this.state.showPersons
+        })
+    };
+
+
     render() {
         const style = {
             backgroundColor: 'red'
         };
+
+        let persons = null;
+
+        if(this.state.showPersons){
+            persons = (
+                <div>
+                    <Person
+                        click={this.switchName}
+                        name={this.state.persons[0].name}
+                    >A</Person>
+
+                    <Person
+                        changed={this.nameChangedHandler}
+                        name={this.state.persons[1].name}
+                    >A</Person>
+                </div>
+            );
+        }
 
         return (
             <div className="App">
@@ -54,19 +82,11 @@ class App extends Component {
                 <div>
                     <button
                         style={style}
-                        onClick={() => this.switchName('ryan')}>Switch Name 2</button>
+                        onClick={this.togglePersonHandler}>Toggle Persons
+                    </button>
                 </div>
-                <div>
-                    <Person
-                        click={this.switchName}
-                        name={this.state.persons[0].name}
-                    >A</Person>
-                </div>
-                <Person
-                    changed={this.nameChangedHandler}
-                    name={this.state.persons[1].name}
-                >A</Person>
 
+                {persons}
             </div>
         );
     }
