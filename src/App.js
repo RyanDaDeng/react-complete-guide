@@ -6,10 +6,10 @@ class App extends Component {
     state = {
         persons: [
             {
-                name: 'Max', age: 28
+                id: '1', name: 'Max', age: 28
             },
             {
-                name: 'Manu', age: 29
+                id: '2', name: 'Manu', age: 29
             }
         ],
         otherState: '',
@@ -35,21 +35,31 @@ class App extends Component {
         //const persons = this.state.persons.slice();
 
         // re-populate the values to a new array, not reference
-        const persons = [...this.state.persons];
+        const persons = [...this.state.persons]; // for array
         persons.splice(index, 1);
         this.setState({persons: persons});
     };
 
-    nameChangedHandler = (event) => {
+    nameChangedHandler = (event, id) => {
+
+        // find index with person id
+        const personIndex = this.state.persons.findIndex(p => {
+            return p.id === id
+        });
+
+        //
+        // for object to create a new object instead of reference
+        const person = {...this.state.persons[personIndex]};
+        person.name = event.target.value;
+        //
+        // create a copy of array not reference and assign the modified value
+        const persons = [...this.state.persons];
+        persons[personIndex] = person;
+
+        //
+        // // set state
         this.setState({
-            persons: [
-                {
-                    name: 'Max', age: 28
-                },
-                {
-                    name: event.target.value, age: 29
-                }
-            ]
+            persons: persons
         })
     };
 
@@ -67,10 +77,6 @@ class App extends Component {
         };
 
         let persons = null;
-
-        for (let person in this.state.persons) {
-
-        }
         if (this.state.showPersons) {
             persons = (
                 <div>
@@ -79,9 +85,11 @@ class App extends Component {
                             <Person
                                 // by adding key index, help list to determine in DOM easily, whenever this part
                                 // is triggered
-                                key={index}
+                                // can also use list element id as well
+                                key={person.id}
                                 click={this.deletePersonHandler.bind(this, index)}
                                 name={person.name}
+                                changed={(event) => this.nameChangedHandler(event, person.id)}
                             >A</Person>
                         )
                     })}
