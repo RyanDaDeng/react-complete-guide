@@ -78,6 +78,7 @@ class App extends Component {
 
         let persons = null;
         if (this.state.showPersons) {
+            style.backgroundColor = 'green';
             persons = (
                 <div>
                     {this.state.persons.map((person, index) => {
@@ -97,9 +98,21 @@ class App extends Component {
             );
         }
 
+        const classes = [];
+
+        if (this.state.persons.length <= 2) {
+            classes.push('red'); // classes will be red
+        }
+
+        if (this.state.persons.length <= 1) {
+            classes.push('bold');
+        }
+
         return (
             <div className="App">
 
+                <h1>This is a good demo. </h1>
+                <p className={classes.join(' ')}>This is interesting.</p>
                 <div>
                     <button onClick={this.switchName.bind(this, 'ryan')}>Switch Name 1</button>
                 </div>
