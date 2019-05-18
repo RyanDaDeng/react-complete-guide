@@ -29,6 +29,17 @@ class App extends Component {
         });
     };
 
+    deletePersonHandler = (index) => {
+        // This has flaw
+        // without slice, it creates a reference
+        //const persons = this.state.persons.slice();
+
+        // re-populate the values to a new array, not reference
+        const persons = [...this.state.persons];
+        persons.splice(index, 1);
+        this.setState({persons: persons});
+    };
+
     nameChangedHandler = (event) => {
         this.setState({
             persons: [
@@ -57,18 +68,20 @@ class App extends Component {
 
         let persons = null;
 
-        if(this.state.showPersons){
+        for (let person in this.state.persons) {
+
+        }
+        if (this.state.showPersons) {
             persons = (
                 <div>
-                    <Person
-                        click={this.switchName}
-                        name={this.state.persons[0].name}
-                    >A</Person>
-
-                    <Person
-                        changed={this.nameChangedHandler}
-                        name={this.state.persons[1].name}
-                    >A</Person>
+                    {this.state.persons.map((person, index) => {
+                        return (
+                            <Person
+                                click={this.deletePersonHandler.bind(this, index)}
+                                name={person.name}
+                            >A</Person>
+                        )
+                    })}
                 </div>
             );
         }
