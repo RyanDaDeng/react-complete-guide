@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import './App.css';
-import Person from './Person/Person';
+import './containers/App.css';
+import Person from './components/Persons/Person/Person';
 
 const app = props => {
     const [personsState, setPersonsState] = useState(
